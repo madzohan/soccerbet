@@ -3,11 +3,17 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from pytz import utc
 
 
-executors = {
-    'default': ThreadPoolExecutor(5),
+EXECUTORS = {
+    'default': ThreadPoolExecutor(5)  # ideal for debugging purposes
+    #  TODO switch to ProcessPoolExecutor (blockers):
+    #       - resolve exception (KeyboardInterrupt, SystemExit) handling in each fork process
 }
-job_defaults = {
+JOB_DEFAULTS = {
     'coalesce': False,
     'max_instances': 1
 }
-odds_scheduler = BackgroundScheduler(executors=executors, job_defaults=job_defaults, timezone=utc)
+
+
+class OddsScheduler(BackgroundScheduler):
+    def __init__(self):
+        super().__init__(executors=EXECUTORS, job_defaults=JOB_DEFAULTS, timezone=utc)

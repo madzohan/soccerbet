@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 apscheduler = "==3.6.3"
 requests = "==2.25.0"
+selenium = "==3.141.0"
 
 [dev-packages]
 pytest = "==6.1.2"
